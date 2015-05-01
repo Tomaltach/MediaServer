@@ -12,7 +12,7 @@ public interface MovieDao {
 	void updateMovie(Movie movie);
 	void saveMovie(Movie movie);
 	void deleteMovie(Movie movie);
-	Movie findById(int movie);
+	Movie findById(int movie_id);
 	List<Movie> findByName(String movie_name);
 	List<Movie> findByGenre(String movie_genre);
 	List<Movie> findByYear(int movie_year);

@@ -8,67 +8,67 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ie.tom.mediaserver.dao.MemberDao;
-import ie.tom.mediaserver.entity.Member;
+import ie.tom.mediaserver.dao.BookDao;
+import ie.tom.mediaserver.entity.Book;
 
 @Repository
 @Transactional
-public class HibernateMemberDao implements MemberDao {
+public class HibernateBookDao implements BookDao {
 	private SessionFactory sessionFactory;
-	
-	public HibernateMemberDao(SessionFactory sessionFactory) {
+
+	public HibernateBookDao(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 	@Override
-	public void addMember(Member member) {
+	public void addBook(Book book) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.save(member);
+		session.save(book);
 	}
 	@Override
-	public void updateMember(Member member) {
+	public void updateBook(Book book) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.save(member);
+		session.save(book);
 	}
 	@Override
-	public void saveMember(Member member) {
+	public void saveBook(Book book) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.merge(member);	
+		session.merge(book);
 	}
 	@Override
-	public void deleteMember(Member member) {
+	public void deleteBook(Book book) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.delete(member);	
+		session.delete(book);
 	}
 	@Override
-	public Member findById(int member_id) {
+	public Book findById(int book_id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		return (Member) session.get(Member.class, member_id);
+		return (Book) session.get(Book.class, book_id);
 	}
 	@Override
-	public Member findByUserName(String userName) {
+	public List<Book> findByName(String book_name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public List<Member> findByFirstName(String firstName) {
+	public List<Book> findByGenre(String book_genre) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public List<Member> findByLastName(String lastName) {
+	public List<Book> findByYear(int book_year) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public List<Member> findByEmail(String email) {
+	public List<Book> findByAuthor(String book_author) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Member> findAll() {
+	public List<Book> findAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query q = session.createQuery("from Member");
+		Query q = session.createQuery("from Book");
 		return q.list();
 	}
 }

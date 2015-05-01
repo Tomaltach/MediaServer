@@ -8,67 +8,62 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ie.tom.mediaserver.dao.MemberDao;
-import ie.tom.mediaserver.entity.Member;
+import ie.tom.mediaserver.dao.LoanDao;
+import ie.tom.mediaserver.entity.Loan;
 
 @Repository
 @Transactional
-public class HibernateMemberDao implements MemberDao {
+public class HibernateLoanDao implements LoanDao {
 	private SessionFactory sessionFactory;
-	
-	public HibernateMemberDao(SessionFactory sessionFactory) {
+
+	public HibernateLoanDao(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 	@Override
-	public void addMember(Member member) {
+	public void addLoan(Loan loan) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.save(member);
+		session.save(loan);
 	}
 	@Override
-	public void updateMember(Member member) {
+	public void updateLoan(Loan loan) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.save(member);
+		session.save(loan);
 	}
 	@Override
-	public void saveMember(Member member) {
+	public void saveLoan(Loan loan) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.merge(member);	
+		session.merge(loan);
 	}
 	@Override
-	public void deleteMember(Member member) {
+	public void deleteLoan(Loan loan) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.delete(member);	
+		session.delete(loan);
 	}
 	@Override
-	public Member findById(int member_id) {
+	public Loan findById(int loan_id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		return (Member) session.get(Member.class, member_id);
+		return (Loan) session.get(Loan.class, loan_id);
 	}
 	@Override
-	public Member findByUserName(String userName) {
+	public List<Loan> findByMemberId(int member_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public List<Member> findByFirstName(String firstName) {
+	public List<Loan> findByMediaId(int media_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public List<Member> findByLastName(String lastName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<Member> findByEmail(String email) {
+	public List<Loan> findByLoanDate(int loan_date) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Member> findAll() {
+	public List<Loan> findAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query q = session.createQuery("from Member");
+		Query q = session.createQuery("from Loan");
 		return q.list();
 	}
 }

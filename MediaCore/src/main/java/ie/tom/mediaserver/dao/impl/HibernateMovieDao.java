@@ -8,67 +8,62 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ie.tom.mediaserver.dao.MemberDao;
-import ie.tom.mediaserver.entity.Member;
+import ie.tom.mediaserver.dao.MovieDao;
+import ie.tom.mediaserver.entity.Movie;
 
 @Repository
 @Transactional
-public class HibernateMemberDao implements MemberDao {
+public class HibernateMovieDao implements MovieDao {
 	private SessionFactory sessionFactory;
 	
-	public HibernateMemberDao(SessionFactory sessionFactory) {
+	public HibernateMovieDao(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 	@Override
-	public void addMember(Member member) {
+	public void addMovie(Movie movie) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.save(member);
+		session.save(movie);
 	}
 	@Override
-	public void updateMember(Member member) {
+	public void updateMovie(Movie movie) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.save(member);
+		session.save(movie);
 	}
 	@Override
-	public void saveMember(Member member) {
+	public void saveMovie(Movie movie) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.merge(member);	
+		session.merge(movie);
 	}
 	@Override
-	public void deleteMember(Member member) {
+	public void deleteMovie(Movie movie) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.delete(member);	
+		session.delete(movie);
 	}
 	@Override
-	public Member findById(int member_id) {
+	public Movie findById(int movie_id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		return (Member) session.get(Member.class, member_id);
+		return (Movie) session.get(Movie.class, movie_id);
 	}
 	@Override
-	public Member findByUserName(String userName) {
+	public List<Movie> findByName(String movie_name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public List<Member> findByFirstName(String firstName) {
+	public List<Movie> findByGenre(String movie_genre) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public List<Member> findByLastName(String lastName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<Member> findByEmail(String email) {
+	public List<Movie> findByYear(int movie_year) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Member> findAll() {
+	public List<Movie> findAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query q = session.createQuery("from Member");
+		Query q = session.createQuery("from Movie");
 		return q.list();
 	}
 }
